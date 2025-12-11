@@ -22,8 +22,8 @@ const routes: Routes = [
         path: '',
         component: HomeComponent,
         children: [
-            { path: '', component: IndexComponent },
-            { path: 'padrinhos', component: PadrinhosComponent },
+            // { path: '', component: IndexComponent },
+            { path: '', component: PadrinhosComponent },
             { path: 'presentes', component: PresentesComponent },
             { path: 'presente-detail/:id', component: PresenteDetailComponent }
         ],
