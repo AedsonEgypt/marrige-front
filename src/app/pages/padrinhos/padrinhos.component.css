@@ -6,7 +6,7 @@
 }
 
 main {
-    background-color: #2a4347;
+    background-color: #C4A664;
     scrollbar-width: none;
     padding: 70px 0px 0 0px;
     display: flex;
@@ -22,7 +22,7 @@ main {
     width: 100%;
     max-width: 500px;
     animation: hidden 4s forwards 0.3s;
-    background-color: #1b2d30;
+    background-color: #C4A664;
 }
 
 .apresentation {
@@ -47,7 +47,7 @@ main {
     color: #FFF;
     opacity: 0;
     padding: 0;
-    animation: moveToTop 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s forwards;
+    animation: moveToTop 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 .title-nome-padrinho {
@@ -57,8 +57,8 @@ main {
     padding: 0;
     animation: moveToTop 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1s forwards;
     margin-bottom: 20px;
-    color: #51b1c2;
-    text-shadow: 0 0 1px #51b1c2;
+    color: #2e2206;
+    text-shadow: 0 0 1px #2e2206;
 }
 
 .imagem-container {
@@ -73,9 +73,7 @@ main {
     right: 0;
     bottom: -5px;
     height: 60%;
-    background: linear-gradient(to bottom, transparent,#2a4347f9 90%, #2a4347);
 }
-
 
 .imagem-container img {
     width: 100%;
@@ -86,12 +84,12 @@ main {
 }
 
 .manual {
-    background: linear-gradient(to bottom,#2a4347, #555555);
+    background: linear-gradient(to bottom,#C4A664);
     position: relative;
     z-index: 1;
     width: 100%;
     flex-grow: 1;
-    padding: 30px 10px 0 10px;
+    padding: 10px 10px 0 10px;
 }
 
 .manual table {
@@ -112,30 +110,23 @@ main {
 }
 
 .manual .manual-padrinhos {
-    background: linear-gradient(to bottom,#2f7683, #2f768355);
+    background: linear-gradient(to bottom, #2f7683);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     padding: 20px 0 40px;
 }
 
 .manual .manual-madrinhas {
-    background: linear-gradient(to bottom,#a94874, #9739637b);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex-wrap: wrap;
     padding: 20px 0 40px;
-}
-
-.manual .manual-padrinhos.visible p{
-    transform: translate(0, 0);
-    opacity: 1;
-}
-
-.manual .manual-padrinhos.visible .photo-2 {
-    display: block;
-    transform: translate(5%, 0);
-    opacity: 1;
+    background: linear-gradient(135deg, #A86A7C 0%, #6C2F3F 100%);
 }
 
 .manual-padrinhos p {
@@ -143,14 +134,11 @@ main {
     margin: 0;
     color: #FFF;
     text-align: center;
-    transform: translate(-500px, 0);
-    opacity: 0;
-    transition: 2s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .manual-madrinhas p {
     margin: 0;
-    color: #FFF;
+    color: #e8e8e8;
     text-align: center;
     padding: 0px 10px 20px 10px;
 }
@@ -188,6 +176,43 @@ main {
     margin-bottom: 15px;
     width: 100%;
 }
+
+.apresentation svg path {
+    width: 100%;
+    fill: white;
+}
+
+.paleta-cores {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.paleta-cores .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin: 10px 0 15px 0;
+    width: calc(100% - 20px);
+    height: 60px;
+    border-radius: 10px;
+
+    p {
+        margin: 0;
+        padding: 0;
+        color: white;
+    }
+}
+
+.divisoria {
+    position: absolute;
+    transform: translateY(-50%);
+    filter: url(#shadow);
+}
+
 
 /* ANIMAÇÕES */
 @keyframes animacaoCores {

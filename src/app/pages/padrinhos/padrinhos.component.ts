@@ -11,6 +11,13 @@ export class PadrinhosComponent implements OnInit {
 
     dsPadrinhos: any[] = [];
 
+    dsCores = [
+        {nome: 'Nome de Alguma Coisa 01', cor: '#1b8811'},
+        {nome: 'Nome de Alguma Coisa 02', cor: '#881111ff'},
+        {nome: 'Nome de Alguma Coisa 03', cor: '#118488ff'},
+        {nome: 'Nome de Alguma Coisa 04', cor: '#251188ff'},
+    ]
+
     pathImgCarrousel: any[] = [
         '../../../assets/photos-padrinhos/transferir (4).jfif.jpg',
         '../../../assets/photos-padrinhos/Ivory dress with a groom wearing a White Tuxedo jacket___.jfif.jpg',
@@ -33,28 +40,11 @@ export class PadrinhosComponent implements OnInit {
         this.search();
     }
 
-    setAnimationScroll() {
-        (document.getElementById('screen'))!.addEventListener('scroll', () => {
-            var scrollTop = window.scrollY || document.documentElement.scrollTop;
-            var element = document.getElementById('manual-padrinhos');
-            var elementOffset = element!.getBoundingClientRect().top + scrollTop;
-            var distance = elementOffset - scrollTop;
-
-            if (distance < window.innerHeight / 1.5) {
-                element!.classList.add('visible');
-            }
-        });
-    }
-
     search() {
         this.rest.getPadrinhos().subscribe({
             next: data => {
                 this.dsPadrinhos = data;
             },
-        }).add(()=> {
-            setTimeout(() => {
-                this.setAnimationScroll();
-            }, 100);
         });
     }
 }

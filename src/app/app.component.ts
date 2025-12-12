@@ -24,6 +24,8 @@ export class AppComponent implements OnInit {
     activeLoading(login: boolean = false) {
         if (window.location.pathname == '/login' && !login) return;
 
+        return;
+        
         this.activeIntro    = true;
         const maxDelay      = 4000;
         const startTime     = moment();
