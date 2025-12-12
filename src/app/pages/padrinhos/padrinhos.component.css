@@ -191,26 +191,92 @@ main {
 }
 
 .paleta-cores .container {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    margin: 10px 0 15px 0;
+    margin: 10px 0 20px 0;
     width: calc(100% - 20px);
-    height: 60px;
-    border-radius: 10px;
+    height: 70px;
+    border-radius: 50px;
 
     p {
         margin: 0;
         padding: 0;
-        color: white;
+        font-family: "Philosopher", sans-serif !important;
     }
+
+    .nome-padrinho {
+        position: absolute;
+        top: 0;
+        left: 30px;
+
+        background: linear-gradient(
+            135deg,
+            transparent,
+            rgba(31, 31, 31, 0.7),
+            transparent
+        );
+
+        /* Efeito vidro */
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        
+        border-radius: 15px;
+        width: calc(100% - 60px);
+        padding: 2px 6px;
+        font-size: 18px;
+        transform: translateY(-40%);
+        z-index: 4;
+    }
+}
+
+/* Esconde por padrão */
+.paleta-cores .container.selecionado::before {
+    content: 'SELECIONADO';
+    position: absolute;
+    width: calc(100% - 4px);
+    height: 66px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.7),
+        rgba(0, 0, 0, 0.7)
+    );
+
+
+    /* Efeito vidro */
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    color: #ebebeb;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: 1px;
+
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 4;
+}
+
+/* Faixa escura por trás */
+.paleta-cores .container.selecionado::after {
+    content: '';
+    position: absolute;
+    width: calc(100% - 37px);
+    border-radius: inherit;
+    height: 30px;
+    background: rgb(0, 0, 0);
 }
 
 .divisoria {
     position: absolute;
     transform: translateY(-50%);
-    filter: url(#shadow);
 }
 
 

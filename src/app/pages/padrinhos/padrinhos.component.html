@@ -48,18 +48,16 @@
                     <section id="manual-madrinhas" class="manual-madrinhas">
                         <h1 class="title">Manual da Madrinha</h1>
                         <p>
-                            Para o look das madrinhas, escolhemos uma paleta de cores vibrantes belíssimas,
-                            para você arrasar naquela roupa de festa de sua escolha,
-                            <b>sem</b> estampas
+                            Escolhemos uma paleta de cores vibrantes e livres para as madrinhas. Por gentileza, selecione a sua cor, lembrando que, após a escolha, ela ficará indisponível para as demais.
+                        </p>
+                        <p style="font-size: 17px; color: white;">
+                            Escolha abaixo a tonalidade que mais combina com você!
                         </p>
 
                         <section class="paleta-cores">
-                            <div class="container" *ngFor="let cor of dsCores"
-                                [ngStyle]="{
-                                    'background-color': cor.cor,
-                                    'box-shadow': '0 0 5px ' + cor.cor,
-                                }">
-                                <p>{{ cor.nome }}</p>
+                            <div class="container" [class.selecionado]="cor.selecionado" *ngFor="let cor of dsCores" [ngStyle]="{'background-color': cor.cor}">
+                                <p [ngStyle]="{'color': cor.fonte, 'font-weight': 'bold'}">{{ cor.nome }}</p>
+                                <p *ngIf="cor.selecionado" class="nome-padrinho" [ngStyle]="{'border': '2px solid ' + cor.cor, 'background-color': cor.cor}">{{cor.nm_padrinho}}</p>
                             </div>
                         </section>
 
