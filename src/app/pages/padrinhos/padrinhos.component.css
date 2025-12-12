@@ -200,36 +200,36 @@ main {
     width: calc(100% - 20px);
     height: 70px;
     border-radius: 50px;
+}
 
-    p {
-        margin: 0;
-        padding: 0;
-        font-family: "Philosopher", sans-serif !important;
-    }
+.paleta-cores .container p {
+    margin: 0;
+    padding: 0;
+    font-family: "Philosopher", sans-serif !important;
+}
 
-    .nome-padrinho {
-        position: absolute;
-        top: 0;
-        left: 30px;
+.paleta-cores .container .nome-padrinho {
+    position: absolute;
+    top: 0;
+    left: 30px;
 
-        background: linear-gradient(
-            135deg,
-            transparent,
-            rgba(31, 31, 31, 0.7),
-            transparent
-        );
+    background: linear-gradient(
+        135deg,
+        transparent,
+        rgba(31, 31, 31, 0.7),
+        transparent
+    );
 
-        /* Efeito vidro */
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        
-        border-radius: 15px;
-        width: calc(100% - 60px);
-        padding: 2px 6px;
-        font-size: 18px;
-        transform: translateY(-40%);
-        z-index: 4;
-    }
+    /* Efeito vidro */
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    
+    border-radius: 15px;
+    width: calc(100% - 60px);
+    padding: 2px 6px;
+    font-size: 18px;
+    transform: translateY(-40%);
+    z-index: 4;
 }
 
 /* Esconde por padrão */
