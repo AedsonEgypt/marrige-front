@@ -126,7 +126,7 @@ main {
     align-items: center;
     flex-wrap: wrap;
     padding: 20px 0 40px;
-    background: linear-gradient(135deg, #A86A7C 0%, #6C2F3F 100%);
+    background: linear-gradient(135deg, rgba(245, 247, 250, 0.85) 0%, rgba(192, 194, 197, 0.85) 100%);
 }
 
 .manual-padrinhos p {
@@ -138,7 +138,7 @@ main {
 
 .manual-madrinhas p {
     margin: 0;
-    color: #e8e8e8;
+    color: rgba(10, 10, 12, 0.7);
     text-align: center;
     padding: 0px 10px 20px 10px;
 }
@@ -200,12 +200,12 @@ main {
     width: calc(100% - 20px);
     height: 70px;
     border-radius: 50px;
+    box-shadow: 0 0 10px rgb(125, 125, 125);
 }
 
 .paleta-cores .container p {
     margin: 0;
     padding: 0;
-    font-family: "Philosopher", sans-serif !important;
 }
 
 .paleta-cores .container .nome-padrinho {
@@ -262,16 +262,6 @@ main {
     border-radius: inherit;
     pointer-events: none;
     z-index: 4;
-}
-
-/* Faixa escura por trás */
-.paleta-cores .container.selecionado::after {
-    content: '';
-    position: absolute;
-    width: calc(100% - 37px);
-    border-radius: inherit;
-    height: 30px;
-    background: rgb(0, 0, 0);
 }
 
 .divisoria {
