@@ -73,11 +73,13 @@ export class PadrinhosComponent implements OnInit {
             await firstValueFrom(this.rest.selecionarCor(this.corSelecionada.id));
             Notify.success('Cor Selecionada com Sucesso');
             this.closePopupCorSelecionada();
+            this.showLoadPanel = false;
+
             this.search();
         } catch (error: any) {
+            this.showLoadPanel = false;
             Notify.error(error);
         }
-        this.showLoadPanel = false;
 
     }
 
@@ -88,10 +90,12 @@ export class PadrinhosComponent implements OnInit {
         try {
             await firstValueFrom(this.rest.deselecionarCor(cor.id));
             Notify.success('Cor desselecionada com sucesso');
+            this.showLoadPanel = false;
+
             this.search();
         } catch (error: any) {
+            this.showLoadPanel = false;
             Notify.error(error);
         }
-        this.showLoadPanel = false;
     }
 }
