@@ -47,7 +47,8 @@ export class IndexComponent implements OnInit, AfterViewInit {
   loadingWriting: boolean = false;
   closingWrite: boolean = false;
 
-  dateFinal: Date = new Date('05 09 2026 15:30:00');
+  // Use numeric constructor (month is 0-indexed) to avoid cross-browser parsing issues
+  dateFinal: Date = new Date(2026, 4, 9, 15, 30, 0);
   dateNow!: Date;
 
   inteval: any;
@@ -56,12 +57,18 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.elementsCounter();
-    this.runCounter;
+    this.runCounter(); // initialize counters immediately
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => this.heightCard(), 1000);
     this.inteval = setInterval(this.runCounter, 1000);
+  }
+
+  ngOnDestroy(): void {
+    if (this.inteval) {
+      clearInterval(this.inteval);
+    }
   }
 
   elementsCounter() {
@@ -85,7 +92,14 @@ export class IndexComponent implements OnInit, AfterViewInit {
       this.hourCount = this.setTwoDig(Math.floor((diff/1000/60/60)%24));
       this.minCount = this.setTwoDig(Math.floor((diff/1000/60)%60));
       this.secCount = this.setTwoDig(Math.floor((diff/1000)%60));
-    } else { this.inteval = 0 }
+    } else {
+      // countdown finished — stop interval and zero out values
+      if (this.inteval) { clearInterval(this.inteval); }
+      this.dayCount = 0;
+      this.hourCount = 0;
+      this.minCount = 0;
+      this.secCount = 0;
+    }
 
   }
 
