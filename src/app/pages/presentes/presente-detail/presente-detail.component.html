@@ -107,12 +107,12 @@
                         (click)="confirmarPresente('VALOR')">PRESENTEAR</button>
 
                     <!-- Comentando pois foi solicitado apenas 1 botão de "presentear" -->
-                    <button *ngIf="!presente.cotas" mat-flat-button color="accent"
+                    <!-- <button *ngIf="!presente.cotas" mat-flat-button color="accent"
                         (click)="confirmarPresente('VALOR')">PRESENTEAR VALOR</button>
                     <button *ngIf="presente.cotas" mat-flat-button color="accent"
                         (click)="confirmarPresente('COTA')">PRESENTEAR COTA </button>
                     <button *ngIf="(!presente.cotas || presente.cotas_disponiveis == presente.cotas) && !presente.vlr_simbolico" mat-flat-button
-                        color="primary" (click)="confirmarPresente('PRODUTO')">PRESENTEAR PRODUTO</button>
+                        color="primary" (click)="confirmarPresente('PRODUTO')">PRESENTEAR PRODUTO</button> -->
                 </div>
             </section>
 
