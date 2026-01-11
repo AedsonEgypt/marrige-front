@@ -47,7 +47,6 @@ export class IndexComponent implements OnInit, AfterViewInit {
   loadingWriting: boolean = false;
   closingWrite: boolean = false;
 
-  // Use numeric constructor (month is 0-indexed) to avoid cross-browser parsing issues
   dateFinal: Date = new Date(2026, 4, 9, 15, 30, 0);
   dateNow!: Date;
 
@@ -57,7 +56,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.elementsCounter();
-    this.runCounter(); // initialize counters immediately
+    this.runCounter();
   }
 
   ngAfterViewInit(): void {
@@ -93,7 +92,6 @@ export class IndexComponent implements OnInit, AfterViewInit {
       this.minCount = this.setTwoDig(Math.floor((diff/1000/60)%60));
       this.secCount = this.setTwoDig(Math.floor((diff/1000)%60));
     } else {
-      // countdown finished — stop interval and zero out values
       if (this.inteval) { clearInterval(this.inteval); }
       this.dayCount = 0;
       this.hourCount = 0;
