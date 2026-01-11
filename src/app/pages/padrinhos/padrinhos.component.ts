@@ -23,9 +23,8 @@ export class PadrinhosComponent implements OnInit {
 
 
     pathImgCarrousel: any[] = [
-        '../../../assets/photos-padrinhos/transferir (4).jfif.jpg',
-        '../../../assets/photos-padrinhos/Ivory dress with a groom wearing a White Tuxedo jacket___.jfif.jpg',
-        '../../../assets/photos-padrinhos/Lucy Struve Photography_ Austin Wedding Photographer.jfif.jpg'
+        '../../../assets/photos-padrinhos/exemplo-2.jpeg',
+        '../../../assets/photos-padrinhos/Ivory dress with a groom wearing a White Tuxedo jacket___.jfif.jpg'
     ];
 
     pathImgCarrouselMadrinha: any[] = [

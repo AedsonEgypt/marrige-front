@@ -70,6 +70,9 @@
                     {{presente.descricao}}
                 </p>
                 <p class="descricao-text text-simple">
+                    Caso prefira comprar o presente físico e nos entregar pessoalmente, fique à vontade. Se optar por essa forma ou tiver qualquer dúvida, é só nos chamar.
+
+                    <!-- O cliente solicitou apenas uma mensagem genêrica -->
                     Caso queira verificar onde nos baseamos o presente, acesse o link
                     <a [href]="presente.img_url" target="_blank" class="link">
                         clicando aqui
@@ -100,6 +103,10 @@
             <section class="presentear">
                 <p style="text-indent: 0;">Forma de presentear:</p>
                 <div class="buttons">
+                    <button *ngIf="!presente.cotas" mat-flat-button color="accent"
+                        (click)="confirmarPresente('VALOR')">PRESENTEAR</button>
+
+                    <!-- Comentando pois foi solicitado apenas 1 botão de "presentear" -->
                     <button *ngIf="!presente.cotas" mat-flat-button color="accent"
                         (click)="confirmarPresente('VALOR')">PRESENTEAR VALOR</button>
                     <button *ngIf="presente.cotas" mat-flat-button color="accent"

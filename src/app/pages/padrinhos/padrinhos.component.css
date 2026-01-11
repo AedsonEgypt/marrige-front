@@ -168,6 +168,10 @@ main {
     width: 100%;
 }
 
+#inspiracoes img {
+    width: calc(100% - 10px);
+}
+
 .manual .manual-padrinhos .photo-1,
 .manual .manual-padrinhos .photo-3,
 .manual .manual-padrinhos .photo-4 {
