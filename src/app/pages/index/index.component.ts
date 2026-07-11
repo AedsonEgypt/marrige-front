@@ -47,7 +47,7 @@ export class IndexComponent implements OnInit, AfterViewInit {
   loadingWriting: boolean = false;
   closingWrite: boolean = false;
 
-  dateFinal: Date = new Date(2026, 4, 9, 15, 30, 0);
+  dateFinal: Date = new Date(2027, 11, 15, 15, 30, 0);
   dateNow!: Date;
 
   inteval: any;
