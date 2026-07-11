@@ -7,19 +7,6 @@
   box-sizing: border-box;
 }
 
-@media (min-width: 620px) {
-  .box-gift {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 920px) {
-  .box-gift {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-  }
-}
-
 .card-container {
   position: relative;
 }
