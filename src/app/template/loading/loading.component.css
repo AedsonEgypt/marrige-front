@@ -8,7 +8,7 @@
   overflow: hidden;
   top: 0;
   z-index: 10;
-  background-color: #0000003c;
+  background-color: rgba(20, 16, 8, 0.35);
 }
 
 .container-loading.close {
@@ -16,17 +16,17 @@
 }
 
 .box-loading {
-  gap: 5px;
-  padding: 10px 60px;
+  gap: 8px;
+  padding: 14px 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100px;
   background-color: #ffffff;
-  border: 1px solid #dbdbdb;
-  box-shadow: 0 3px 10px #272727;
-  border-radius: 10px;
+  border: 1px solid #f0ebe0;
+  box-shadow: 0 14px 34px rgba(20, 15, 5, 0.25);
+  border-radius: 14px;
 }
 
 h2 {
@@ -34,12 +34,13 @@ h2 {
 }
 
 .title-loading {
-  color: #272727;
-  font-size: 16px;
-
+  color: #2b2620;
+  font-size: 15px;
+  font-family: "Numans", sans-serif !important;
+  font-weight: 400;
 }
 
 .fa-spinner {
-  color: #272727;
+  color: #a9762c;
   font-size: 20px;
 }

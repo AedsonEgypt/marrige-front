@@ -1,26 +1,24 @@
 <loading [visible]="showLoadPanel"></loading>
-<html>
-    <section *ngIf="active" class="screen">
 
-        <body class="gift">
-            <div>
-                <button type="button" class="btn-voltar" (click)="close()">
-                    <i class="fas fa-arrow-left"></i>
-                    Escolher outro presente
-                </button>
+<section *ngIf="active" class="screen">
+
+    <div class="gift">
+        <button type="button" class="btn-voltar" (click)="close()">
+            <i class="fas fa-arrow-left"></i>
+            Escolher outro presente
+        </button>
+
+        <h3>{{presente.nome}}</h3>
+
+        <section class="gift-img">
+            <span *ngIf="presente.cotas > 1" class="pill-cota-disponivel">Restam {{presente.cotas_disponiveis}} cotas disponíveis</span>
+            <div class="img-container">
+                <img [src]="presente.path_img" alt="">
             </div>
+        </section>
 
-            <h3>{{presente.nome}}</h3>
-
-            <section class="gift-img">
-                <div *ngIf="presente.cotas > 1" class="cota-messagem">Restam {{presente.cotas_disponiveis}} cotas
-                    disponíveis</div>
-                <div class="img-container">
-                    <img [src]="presente.path_img">
-                </div>
-            </section>
-
-            <p *ngIf="!presente.cotas" style="text-indent: 0; margin: 0; font-weight: bold;">Preço Total:</p>
+        <div class="price-panel">
+            <p *ngIf="!presente.cotas" class="price-label">Preço Total</p>
             <div *ngIf="!presente.cotas" class="valor-container">
                 <p class="valor">R$ {{presente.valor_disponivel.toFixed(2).split('.')[0]}}</p>
                 <p class="valor-decimal">{{presente.valor_disponivel.toFixed(2).split('.')[1]}}</p>
@@ -38,7 +36,7 @@
                 ou até 12x com juros
             </span>
 
-            <p *ngIf="presente.cotas > 1" style="text-indent: 0; margin: 20px 0 0 0;">Preço por Cota:</p>
+            <p *ngIf="presente.cotas > 1" class="price-label price-label-cota">Preço por Cota</p>
             <div *ngIf="presente.cotas > 1" class="valor-container">
                 <p class="valor">R$ {{presente.vlr_cota.toFixed(2).split('.')[0]}}</p>
                 <p class="valor-decimal">{{presente.vlr_cota.toFixed(2).split('.')[1]}}</p>
@@ -56,175 +54,148 @@
                 ou até 12x com juros
             </span>
 
-            <p *ngIf="presente.cotas" style="text-indent: 0; margin: 15px 0 0 0; font-weight: bold;">
+            <p *ngIf="presente.cotas" class="price-label-restante">
                 Preço Total Restante: <b>{{ presente.valor_disponivel.toLocaleString('pt-br', getCurrencyBrlOptions) }}</b>
             </p>
-
-            <section class="descricao">
-                <p style="text-indent: 0; font-weight: bold;">Anotações:</p>
-                <p class="descricao-text valor-simbolico" *ngIf="presente.vlr_simbolico">
-                    Este presente, tem apenas a opção de presentar o valor, isto porquê o produto correto deve ser comprado ou de forma
-                    presencial ou de acordo com a casa onde iremos morar
-                </p>
-                <p class="descricao-text" *ngIf="presente.descricao != null && presente.descricao != ''">
-                    {{presente.descricao}}
-                </p>
-                <p class="descricao-text text-simple">
-                    Caso prefira comprar o presente físico e nos entregar pessoalmente, fique à vontade. Se optar por essa forma ou tiver qualquer dúvida, é só nos chamar.
-
-                    <!-- O cliente solicitou apenas uma mensagem genêrica -->
-                    Caso queira verificar onde nos baseamos o presente, acesse o link
-                    <a [href]="presente.img_url" target="_blank" class="link">
-                        clicando aqui
-                    </a>
-                </p>
-            </section>
-
-            <div *ngIf="presente.tags">
-                <p style="text-indent: 0; font-weight: bold;">Especificações:</p>
-
-                <table style="margin-top: 10px;" mat-table [dataSource]="presente.tags" class="mat-elevation-z2">
-                    <ng-container matColumnDef="nome">
-                        <!-- <th mat-header-cell *matHeaderCellDef> Nome </th> -->
-                        <td mat-cell *matCellDef="let element" style="font-weight: bold;"> {{element.nome}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="descricao">
-                        <!-- <th mat-header-cell *matHeaderCellDef> Descrição </th> -->
-                        <td mat-cell *matCellDef="let element"> {{element.descricao}} </td>
-                    </ng-container>
-                    <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> -->
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-            </div>
-
-            <section class="ajuste-altura"></section>
-
-            <section class="presentear">
-                <p style="text-indent: 0;">Forma de presentear:</p>
-                <div class="buttons">
-                    <button *ngIf="!presente.cotas" mat-flat-button color="accent"
-                        (click)="confirmarPresente('VALOR')">PRESENTEAR</button>
-
-                    <!-- Comentando pois foi solicitado apenas 1 botão de "presentear" -->
-                    <!-- <button *ngIf="!presente.cotas" mat-flat-button color="accent"
-                        (click)="confirmarPresente('VALOR')">PRESENTEAR VALOR</button>
-                    <button *ngIf="presente.cotas" mat-flat-button color="accent"
-                        (click)="confirmarPresente('COTA')">PRESENTEAR COTA </button>
-                    <button *ngIf="(!presente.cotas || presente.cotas_disponiveis == presente.cotas) && !presente.vlr_simbolico" mat-flat-button
-                        color="primary" (click)="confirmarPresente('PRODUTO')">PRESENTEAR PRODUTO</button> -->
-                </div>
-            </section>
-
-        </body>
-    </section>
-
-    <popup id="popup-item-confirm" *ngIf="showPopupConfirmar"
-        (close)="showPopupConfirmar = false; presente.tipoPresente = null;" title="Confirmar Presente"
-        textBtnClose="Escolher Outro">
-        <div class="container">
-
-            <p style="width: 100%;">Resumo:</p>
-            <div class="container-main">
-                <div class="item-img">
-                    <img [src]="presente.path_img">
-                </div>
-
-                <div class="group">
-                    <p class="item-nome">{{ presente.nome }}</p>
-
-                    <div class="text-group">
-                        <p>Site Referência: </p>
-                        <p><a [href]="presente.img_url" target="_blank">Site</a></p>
-                    </div>
-
-                    <div class="text-group">
-                        <p>Presentendo com: </p>
-                        <p><b>{{presente.tipoPresente == 'PRODUTO' ? 'Produto' : 'Valor'}}</b></p>
-                    </div>
-
-                    <div class="text-group">
-                        <p>Valor {{presente.tipoPresente == 'COTA' ? 'Cota' : 'Total'}}: </p>
-                        <p><b>
-                            {{
-                                presente.tipoPresente == 'COTA' ?
-                                presente.vlr_cota.toLocaleString('pt-br', getCurrencyBrlOptions) :
-                                presente.valor_disponivel.toLocaleString('pt-br', getCurrencyBrlOptions)
-                            }}
-                        </b></p>
-                    </div>
-
-                </div>
-            </div>
-
-            <div *ngIf="presente.cotas && presente.cotas > 1 &&  presente.tipoPresente != 'PRODUTO'" class="separator"><i class="fas fa-gift"></i></div>
-
-            <div class="group" *ngIf="presente.cotas && presente.cotas > 1 && presente.tipoPresente != 'PRODUTO'">
-                <form class="form-container" *ngIf="presente.cotas_disponiveis > 1">
-                    <mat-label>Quantidade de Cotas</mat-label>
-                    <mat-slider min="1" [max]="presente.cotas_disponiveis" step="1" showTickMarks discrete style="width: 70%;">
-                        <input matSliderThumb [(ngModel)]="form.quantidade" #quantidade name="quantidade">
-                    </mat-slider>
-                </form>
-
-                <div class="text-group">
-                    <p style="font-size: 17px;">Valor a Presentear: </p>
-                    <p style="font-size: 17px;"><b style="color: #339450">
-                        {{ getValorPresentear }}
-                    </b></p>
-                </div>
-            </div>
-
-            <div class="separator"><i class="fas fa-gift"></i></div>
-
-            <p class="text justify" *ngIf="presente.tipoPresente == 'PRODUTO'">
-                Fique a vontade para comprar onde quiser! Só clicar em <b style="color: #51b934;">Presentear Produto</b>,
-                e saberemos que poderemos contar com você!💖
-            </p>
-            <div *ngIf="presente.tags && presente.tipoPresente == 'PRODUTO'" style="width: 100%; margin-bottom: 10px;">
-                <p style="text-indent: 0;">Especificações:</p>
-                <table style="margin-top: 10px;" mat-table [dataSource]="presente.tags" class="mat-elevation-z2">
-                    <ng-container matColumnDef="nome">
-                        <!-- <th mat-header-cell *matHeaderCellDef> Nome </th> -->
-                        <td mat-cell *matCellDef="let element" style="font-weight: bold;"> {{element.nome}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="descricao">
-                        <!-- <th mat-header-cell *matHeaderCellDef> Descrição </th> -->
-                        <td mat-cell *matCellDef="let element"> {{element.descricao}} </td>
-                    </ng-container>
-                    <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> -->
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
-            </div>
-            <p class="text justify" *ngIf="presente.tipoPresente != 'PRODUTO'">
-                Fique a vontade para doar o valor da forma que quiser! Clicando em <b style="color: #51b934;">Presentear Valor</b>,
-                abrirá uma nova página para poder fazer o pagamento. Obrigado de verdade por sua contribuição!💖
-            </p>
-
         </div>
 
-        <button-popup
-            [text]="presente.tipoPresente == 'PRODUTO' ? 'Presentear Produto' : 'Presentear Valor'"
-            type="success"
-            (onClick)="submit()"
-        ></button-popup>
-    </popup>
-    <popup
-        id="popup-item-selecionado"
-        *ngIf="showPopupSelecionado"
-        (close)="produtoSelecionado()"
-        title="Presente Selecionado"
-        [btnFecharVisible]="false"
-    >
-        <p style="text-align: center;">
-            Este presente já foi selecionado ou presenteado, por favor selecione outro!
+        <section class="descricao">
+            <p class="section-label">Anotações</p>
+            <p class="descricao-text valor-simbolico" *ngIf="presente.vlr_simbolico">
+                Este presente, tem apenas a opção de presentar o valor, isto porquê o produto correto deve ser comprado ou de forma
+                presencial ou de acordo com a casa onde iremos morar
+            </p>
+            <p class="descricao-text" *ngIf="presente.descricao != null && presente.descricao != ''">
+                {{presente.descricao}}
+            </p>
+            <p class="descricao-text text-simple">
+                Caso prefira comprar o presente físico e nos entregar pessoalmente, fique à vontade. Se optar por essa forma ou tiver qualquer dúvida, é só nos chamar.
+
+                <!-- O cliente solicitou apenas uma mensagem genêrica -->
+                Caso queira verificar onde nos baseamos o presente, acesse o link
+                <a [href]="presente.img_url" target="_blank" class="link">
+                    clicando aqui
+                </a>
+            </p>
+        </section>
+
+        <div *ngIf="presente.tags" class="especificacoes">
+            <p class="section-label">Especificações</p>
+
+            <div class="spec-row" *ngFor="let tag of presente.tags">
+                <span class="spec-nome">{{tag.nome}}</span>
+                <span class="spec-descricao">{{tag.descricao}}</span>
+            </div>
+        </div>
+
+        <section class="ajuste-altura"></section>
+
+        <section class="presentear">
+            <p class="section-label">Forma de presentear</p>
+            <div class="buttons">
+                <button type="button" *ngIf="!presente.cotas" class="btn-gift-detail" (click)="confirmarPresente('VALOR')">Presentear</button>
+            </div>
+        </section>
+    </div>
+
+</section>
+
+<popup id="popup-item-confirm" *ngIf="showPopupConfirmar"
+    (close)="showPopupConfirmar = false; presente.tipoPresente = null;" title="Confirmar Presente"
+    textBtnClose="Escolher Outro">
+    <div class="container">
+
+        <p class="section-label full-width">Resumo</p>
+        <div class="container-main">
+            <div class="item-img">
+                <img [src]="presente.path_img" alt="">
+            </div>
+
+            <div class="group">
+                <p class="item-nome">{{ presente.nome }}</p>
+
+                <div class="text-group">
+                    <p>Site Referência</p>
+                    <p><a [href]="presente.img_url" target="_blank">Site</a></p>
+                </div>
+
+                <div class="text-group">
+                    <p>Presenteando com</p>
+                    <p class="value">{{presente.tipoPresente == 'PRODUTO' ? 'Produto' : 'Valor'}}</p>
+                </div>
+
+                <div class="text-group">
+                    <p>Valor {{presente.tipoPresente == 'COTA' ? 'Cota' : 'Total'}}</p>
+                    <p class="value">
+                        {{
+                            presente.tipoPresente == 'COTA' ?
+                            presente.vlr_cota.toLocaleString('pt-br', getCurrencyBrlOptions) :
+                            presente.valor_disponivel.toLocaleString('pt-br', getCurrencyBrlOptions)
+                        }}
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div *ngIf="presente.cotas && presente.cotas > 1 &&  presente.tipoPresente != 'PRODUTO'" class="separator"><i class="fas fa-gift"></i></div>
+
+        <div class="group" *ngIf="presente.cotas && presente.cotas > 1 && presente.tipoPresente != 'PRODUTO'">
+            <form class="form-container" *ngIf="presente.cotas_disponiveis > 1">
+                <mat-label>Quantidade de Cotas</mat-label>
+                <mat-slider min="1" [max]="presente.cotas_disponiveis" step="1" showTickMarks discrete style="width: 70%;">
+                    <input matSliderThumb [(ngModel)]="form.quantidade" #quantidade name="quantidade">
+                </mat-slider>
+            </form>
+
+            <div class="text-group">
+                <p style="font-size: 17px;">Valor a Presentear</p>
+                <p class="value" style="font-size: 17px;">
+                    {{ getValorPresentear }}
+                </p>
+            </div>
+        </div>
+
+        <div class="separator"><i class="fas fa-gift"></i></div>
+
+        <p class="text justify" *ngIf="presente.tipoPresente == 'PRODUTO'">
+            Fique a vontade para comprar onde quiser! Só clicar em <b class="highlight">Presentear Produto</b>,
+            e saberemos que poderemos contar com você! 💖
+        </p>
+        <div *ngIf="presente.tags && presente.tipoPresente == 'PRODUTO'" class="especificacoes full-width">
+            <p class="section-label">Especificações</p>
+            <div class="spec-row" *ngFor="let tag of presente.tags">
+                <span class="spec-nome">{{tag.nome}}</span>
+                <span class="spec-descricao">{{tag.descricao}}</span>
+            </div>
+        </div>
+        <p class="text justify" *ngIf="presente.tipoPresente != 'PRODUTO'">
+            Fique a vontade para doar o valor da forma que quiser! Clicando em <b class="highlight">Presentear Valor</b>,
+            abrirá uma nova página para poder fazer o pagamento. Obrigado de verdade por sua contribuição! 💖
         </p>
 
-        <button-popup
-            [text]="'Escolher outro Presente'"
-            type="default"
-            (onClick)="produtoSelecionado()"
-        ></button-popup>
-    </popup>
-</html>
+    </div>
+
+    <button-popup
+        [text]="presente.tipoPresente == 'PRODUTO' ? 'Presentear Produto' : 'Presentear Valor'"
+        type="success"
+        (onClick)="submit()"
+    ></button-popup>
+</popup>
+<popup
+    id="popup-item-selecionado"
+    *ngIf="showPopupSelecionado"
+    (close)="produtoSelecionado()"
+    title="Presente Selecionado"
+    [btnFecharVisible]="false"
+>
+    <p style="text-align: center;">
+        Este presente já foi selecionado ou presenteado, por favor selecione outro!
+    </p>
+
+    <button-popup
+        [text]="'Escolher outro Presente'"
+        type="default"
+        (onClick)="produtoSelecionado()"
+    ></button-popup>
+</popup>

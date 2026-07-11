@@ -1,59 +1,46 @@
 <div class="box-gift">
 
     <div class="card-container" *ngFor="let item of dataSource">
-        <div [class]="'card-gift'" [style]="borderGift(item.level)">
+        <div class="card-gift">
 
-            <div class="priority" *ngIf="!hiddenPriority">
-                {{item.prioridade + '°'}}
-            </div>
+            <div class="media-gift" (click)="btnClick.emit({item: item, cancelar: false})">
+                <img [src]="item.path_img" loading="lazy" alt="">
 
-            <div [class]="'banner'" [style]="bannerStyle(item.level)">
-                <div>{{ lookup(item.level) }}</div>
-            </div>
+                <span class="tag-category" [style]="bannerStyle(item.level)">{{ lookup(item.level) }}</span>
+                <span class="tag-priority" *ngIf="!hiddenPriority">{{item.prioridade}}°</span>
+                <span class="tag-simbolico" *ngIf="item.vlr_simbolico">Valor simbólico</span>
 
-            <div *ngIf="item.vlr_simbolico" class="valor-simbolico">
-                VALOR SIMBÓLICO
-            </div>
-
-            <div class="buttons">
-                <span (click)="onExlcuir.emit(item)" title="Excluir Presente"><i *ngIf="isAdmin" id="btn-excluir" class="fas fa-close"></i></span>
-                <span *ngIf="showBtnPaymentManual"  (click)="onAddPayment.emit(item)" title="Adicionar Pagamento Manual"><i *ngIf="isAdmin" id="btn-add-payment" class="fas fa-file-invoice-dollar"></i></span>
-            </div>
-
-
-            <div class="img-gift" (click)="btnClick.emit({item: item, cancelar: false})">
-                <img [src]="item.path_img">
-            </div>
-
-            <div class="info-gift" (click)="btnClick.emit({item: item, cancelar: false})">
-                <div class="title">{{ item.nome }}</div>
-                <div class="price" *ngIf="!hiddenPrice">
-                    <div *ngIf="item.cotas > 1" class="cota">Restam {{item.cotas_disponiveis}} Cota's</div>
-                    <div class="info-gift price" [style]="!item.cotas ? 'padding-top: 10px' : '' ">
-                        {{item.flg_disponivel ? 'R$ ' + item.valor : null}}
-                    </div>
-                    <div *ngIf="item.flg_disponivel && item.cotas > 1" class="info-gift price-cota">
-                        COTA: R$ {{item.vlr_cota}}
-                    </div>
+                <div class="overlay-selecionado" *ngIf="!item.flg_disponivel">
+                    <span class="pill-selecionado" [style]="bannerStyle(item.level)"><i class="fas fa-check"></i>Selecionado</span>
                 </div>
             </div>
 
-            <div *ngIf="!item.flg_disponivel" class="selecionado">
-                <div class="text-selecionado" [style]="bannerStyle(item.level)">SELECIONADO</div>
-            </div>
+            <div class="content-gift">
+                <div class="admin-actions" *ngIf="isAdmin">
+                    <button type="button" class="icon-btn danger" (click)="onExlcuir.emit(item)" title="Excluir Presente">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button type="button" class="icon-btn info" *ngIf="showBtnPaymentManual" (click)="onAddPayment.emit(item)" title="Adicionar Pagamento Manual">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </button>
+                </div>
 
-            <button *ngIf="!item.selected_by_user_id && item.flg_disponivel" [class]="'btn-value-gift'" (click)="btnClick.emit({item: item, cancelar: false})">
-                {{nameBtnPrimary}}
-            </button>
-            <button
-                *ngIf="showBtnCancelar(item)"
-                [class]="'btn-value-gift cancelar'"
-                (click)="btnClick.emit({item: item, cancelar: true})"
-            >Cancelar</button>
-            <button
-                *ngIf="!showBtnCancelar(item) && !item.flg_disponivel"
-                [class]="'btn-value-gift empty'"
-            ></button>
+                <h3 class="title" (click)="btnClick.emit({item: item, cancelar: false})">{{ item.nome }}</h3>
+
+                <div class="price-block" *ngIf="!hiddenPrice">
+                    <span class="tag-cota" *ngIf="item.cotas > 1">Restam {{item.cotas_disponiveis}} cota's</span>
+                    <span class="price">{{item.flg_disponivel ? 'R$ ' + item.valor : ''}}</span>
+                    <span class="price-cota" *ngIf="item.flg_disponivel && item.cotas > 1">Cota: R$ {{item.vlr_cota}}</span>
+                </div>
+
+                <button *ngIf="!item.selected_by_user_id && item.flg_disponivel" class="btn-gift primary" (click)="btnClick.emit({item: item, cancelar: false})">
+                    {{nameBtnPrimary}}
+                </button>
+                <button *ngIf="showBtnCancelar(item)" class="btn-gift cancelar" (click)="btnClick.emit({item: item, cancelar: true})">
+                    Cancelar
+                </button>
+                <div *ngIf="!showBtnCancelar(item) && !item.flg_disponivel" class="btn-gift empty"></div>
+            </div>
 
         </div>
     </div>

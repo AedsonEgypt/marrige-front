@@ -41,11 +41,6 @@ export class GiftComponent {
         return Boolean(item.selected_by_user_id == this.user.id || (item.selected_by_user_id && this.user.role_id == 1));
     }
 
-    borderGift(area: any): string {
-        const selection = this.dsArea.filter(el => el.id == area);
-        return `box-shadow: 0px 0px 5px ${selection[0].color}; border: 1px solid ${selection[0].color} ;`
-    }
-
     bannerStyle(area: any) {
 
         const selection = this.dsArea.filter(el => el.id == area);

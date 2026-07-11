@@ -22,8 +22,6 @@ export class PresenteDetailComponent {
         quantidade: 1
     }
 
-    displayedColumns = ['nome', 'descricao'];
-
     constructor(
         private route: ActivatedRoute,
         private router: Router,
