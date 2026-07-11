@@ -1,4 +1,5 @@
 export const environment = {
-  production: false,
-  apiUrl: 'https://site-casamento-da3be27db564.herokuapp.com/api'
+  production: true,
+  // Troque pela URL real do backend depois do primeiro deploy no Railway.
+  apiUrl: 'https://marrige-production.up.railway.app/api'
 };

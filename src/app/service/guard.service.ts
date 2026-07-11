@@ -1,8 +1,8 @@
 import { Notify } from 'src/app/template/notify';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { BehaviorSubject, catchError, delay, Observable, of, retry, switchMap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, switchMap } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -75,56 +75,4 @@ export class GuardService {
         return result!;
     }
 
-    activeBack(): Observable<any> {
-        const updates = [{ type: "web", quantity: 1 }];
-        const headers = new HttpHeaders({
-            'Accept': 'application/vnd.heroku+json; version=3',
-            'Authorization': 'Bearer HRKU-0ebc5eb7-5b9c-4a65-b4b8-0b0e70efe112',
-        });
-
-        const data: Observable<any> = this.http.patch('https://api.heroku.com/apps/marrige-back/formation', { updates }, { headers }).pipe(
-            catchError(error => {
-                Notify.error(error.message);
-                return throwError(() => error);
-            })
-        );
-
-        return data;
-    }
-
-    API(): Observable<any> {
-        const data: Observable<any> = this.http.get(this.endpoint + '/api').pipe(
-            catchError(e => {
-                return throwError(() => e);
-            })
-        );
-
-        return data;
-    }
-
-    ligarAPI(): Observable<any> {
-        const maxTentativas = 1;
-
-        return this.API().pipe(
-            retry(maxTentativas),
-            switchMap((response) => {
-                const dataAtual = new Date().getTime();
-                return of(response);
-            }),
-            catchError(error => {
-                console.log('Falha nas tentativas de conectar à API, chamando activeBack...');
-                return this.activeBack().pipe(
-                    delay(1000),
-                    switchMap(() => {
-                        return this.API().pipe(
-                            switchMap((response) => {
-                                const dataAtual = new Date().getTime();
-                                return of(response);
-                            })
-                        );
-                    })
-                );
-            })
-        );
-    }
 }
